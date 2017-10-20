@@ -52,7 +52,7 @@ reps=$4;
 #for bw in 300 400 500 600 700 800 900; do
 #for bw in 600 700 800 900 1000 1100 1200; do
 	cd has-evalvm/shaping
-	sudo setupShaper.sh	
+	sudo ./setupShaper.sh	
       	echo $bw > value
 	sudo ./rate.sh
 	cd ../..
