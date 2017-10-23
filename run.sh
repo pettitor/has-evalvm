@@ -75,7 +75,7 @@ reps=$4;
 			#output=$direct/"$bw"kbit_"$counter".log
 	
 #			chromium-browser --disk-cache-dir=/dev/null --mute-audio --enable-logging --log-level=0 http://127.0.0.1:8000/test.html &
-			python tapas/play.py -u http://localhost:8000/has-evalvm/vids/Parkour/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8 -m nodec -i $3 -b $bwparam > player.log
+			python tapas/play.py -u http://127.0.0.1:8000/has-evalvm/vids/Parkour/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8 -m nodec -i $3 -b $bwparam > player.log
 #			python tapas-master/play.py -u http://localhost:8000/vids/BBB/playlist.m3u8 -m nodec -b $bwparam > player.log
 
 			# Wait for player to start video playback
