@@ -42,7 +42,7 @@ reps=$4;
 			while [ $STATUS -eq 0 ]; do
 			#    echo $STATUS
 			    STATUS=$(pgrep python | wc -l)
-			    sleep 1
+			    sleep 3
 			done
 
 			#output=$direct/"$bw"kbit_"$counter".log
@@ -66,4 +66,4 @@ reps=$4;
 #done
 
 tar czf player_"$bw"kbit_cv"$cvar"_init"$3".tar.gz logs/*.log
-scp -o -o StrictHostKeyChecking=no player_"$bw"kbit_cv"$cvar"_init"$3".tar.gz valli@132.187.12.137:workspace/HASDocker/
+scp -o StrictHostKeyChecking=no player_"$bw"kbit_cv"$cvar"_init"$3".tar.gz valli@132.187.12.137:workspace/HASDocker/
