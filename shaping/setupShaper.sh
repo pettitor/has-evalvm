@@ -23,7 +23,7 @@ modprobe act_mirred
                                         # e.g ethtool -K eth1 gro off if you have eth1
 					# some devices you may need to run these 
 					# commands independently
-
+#sleep 3
 
 # Clear old queuing disciplines (qdisc) on the interfaces
 #$tc qdisc del dev $ext root
