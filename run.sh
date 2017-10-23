@@ -23,6 +23,7 @@ log_output_dir=$(pwd)"/logs/"
 
 #start server
 killall python
+sleep 2s
 #current_dir=$PWD;
 #cd ../..;
 #python -m SimpleHTTPServer &> server.log &
@@ -71,6 +72,12 @@ reps=$4;
 			#> $browser_log_dir
 			> server.log
 			python -m SimpleHTTPServer &> server.log &
+			STATUS=0
+			while [ $STATUS -eq 0 ]; do
+			#    echo $STATUS
+			    STATUS=$(pgrep python | wc -l)
+			    sleep 1
+			done
 
 			#output=$direct/"$bw"kbit_"$counter".log
 	
