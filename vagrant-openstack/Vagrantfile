@@ -126,7 +126,7 @@ Vagrant.configure(2) do |config|
      git clone https://github.com/pettitor/has-evalvm.git
      sudo has-evalvm/shaping/setupShaper.sh
 #     has-evalvm/run.sh #{ENV['BW']} #{ENV['CV']} #{ENV['MQ']} #{ENV['REPS']} &
-     has-evalvm/run.sh #{machine[:bw]} #{machine[:cv]} #{machine[:init]} 30 &
+     screen -dmS run has-evalvm/run.sh #{machine[:bw]} #{machine[:cv]} #{machine[:init]} 30 &
   SHELL
 end
 end

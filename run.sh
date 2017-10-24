@@ -23,6 +23,17 @@ reps=$4;
       	echo $bw > value
 	sudo ./rate.sh
 	cd ../..
+
+	> server.log
+        python -m SimpleHTTPServer &> server.log &
+	STATUS=0
+	while [ $STATUS -eq 0 ]; do
+	#    echo $STATUS
+	    STATUS=$(pgrep python | wc -l)
+	    sleep 1s
+	done
+
+
 	#for trace in "$traces_dir"/report_*.sh ; do
 		#file=$(basename "$bw" kbps)
 		#name=${file%.*}
@@ -36,22 +47,13 @@ reps=$4;
 		counter=1
 		while [ $counter -le $reps ]; do
 			#> $browser_log_dir
-			> server.log
-			python -m SimpleHTTPServer &> server.log &
-			STATUS=0
-			while [ $STATUS -eq 0 ]; do
-			#    echo $STATUS
-			    STATUS=$(pgrep python | wc -l)
-			    sleep 3
-			done
-
 			#output=$direct/"$bw"kbit_"$counter".log
 	
 #			chromium-browser --disk-cache-dir=/dev/null --mute-audio --enable-logging --log-level=0 http://127.0.0.1:8000/test.html &
 			python tapas/play.py -u http://127.0.0.1:8000/has-evalvm/vids/Parkour/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8 -m nodec -i $3 -b $bwparam > player.log
 #			python tapas-master/play.py -u http://localhost:8000/vids/BBB/playlist.m3u8 -m nodec -b $bwparam > player.log
 
-		      cp server.log "$direct"/server_"$bw"kbit_cv"$cvar"_init"$3"_"$counter".log	
+#		      cp server.log "$direct"/server_"$bw"kbit_cv"$cvar"_init"$3"_"$counter".log	
 		      cp player.log "$direct"/player_"$bw"kbit_cv"$cvar"_init"$3"_"$counter".log
 
 #			pgrep trace_loop | xargs kill
@@ -60,8 +62,7 @@ reps=$4;
 
 			sleep 2s
 			echo "completed "$cvar","$bw","$counter
-			counter=$((counter + 1))
-		done
+			counter=$((counter + 1))	done
 #	done
 #done
 
