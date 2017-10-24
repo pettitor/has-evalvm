@@ -8,6 +8,15 @@ log_output_dir=$(pwd)"/logs/"
 #start server
 killall python
 sleep 2s
+> server.log
+python -m SimpleHTTPServer &> server.log &
+STATUS=0
+while [ $STATUS -eq 0 ]; do
+#    echo $STATUS
+    STATUS=$(pgrep python | wc -l)
+    sleep 1s
+done
+
 #current_dir=$PWD;
 #cd ../..;
 #reps=20
@@ -23,16 +32,6 @@ reps=$4;
       	echo $bw > value
 	sudo ./rate.sh
 	cd ../..
-
-	> server.log
-        python -m SimpleHTTPServer &> server.log &
-	STATUS=0
-	while [ $STATUS -eq 0 ]; do
-	#    echo $STATUS
-	    STATUS=$(pgrep python | wc -l)
-	    sleep 1s
-	done
-
 
 	#for trace in "$traces_dir"/report_*.sh ; do
 		#file=$(basename "$bw" kbps)
@@ -58,11 +57,12 @@ reps=$4;
 
 #			pgrep trace_loop | xargs kill
 #			pgrep report_* | xargs kill
-			killall python			
+#			killall python			
 
-			sleep 2s
+			sleep 1s
 			echo "completed "$cvar","$bw","$counter
-			counter=$((counter + 1))	done
+			counter=$((counter + 1))
+		done
 #	done
 #done
 
