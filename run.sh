@@ -22,7 +22,7 @@ done
 #reps=20
 bw=$1;
 cvar=$2;
-reps=$4; 
+reps=$5; 
 
 #for cvar in 0.0 0.1 0.2 0.4; do
 #for bw in 300 400 500 600 700 800 900; do
@@ -49,11 +49,11 @@ reps=$4;
 			#output=$direct/"$bw"kbit_"$counter".log
 	
 #			chromium-browser --disk-cache-dir=/dev/null --mute-audio --enable-logging --log-level=0 http://127.0.0.1:8000/test.html &
-			python tapas/play.py -u http://127.0.0.1:8000/has-evalvm/vids/Parkour/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8 -m nodec -i $3 -b $bwparam > player.log
+			python tapas/play.py -u http://127.0.0.1:8000/has-evalvm/vids/Parkour/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8 -m nodec -i $3 -b $bwparam -p $4 > player.log
 #			python tapas-master/play.py -u http://localhost:8000/vids/BBB/playlist.m3u8 -m nodec -b $bwparam > player.log
 
 #		      cp server.log "$direct"/server_"$bw"kbit_cv"$cvar"_init"$3"_"$counter".log	
-		      cp player.log "$direct"/player_"$bw"kbit_cv"$cvar"_init"$3"_"$counter".log
+		      cp player.log "$direct"/player_"$bw"kbit_cv"$cvar"_init"$3"_p"$4"_"$counter".log
 
 #			pgrep trace_loop | xargs kill
 #			pgrep report_* | xargs kill
@@ -66,5 +66,5 @@ reps=$4;
 #	done
 #done
 
-tar czf player_"$bw"kbit_cv"$cvar"_init"$3".tar.gz logs/*.log
-scp -o StrictHostKeyChecking=no player_"$bw"kbit_cv"$cvar"_init"$3".tar.gz valli@132.187.12.137:workspace/HASDocker/
+tar czf player_"$bw"kbit_cv"$cvar"_init"$3"_p"$4".tar.gz logs/*.log
+scp -o StrictHostKeyChecking=no player_"$bw"kbit_cv"$cvar"_init"$3"_p"$4".tar.gz valli@132.187.12.137:workspace/HASDocker/
