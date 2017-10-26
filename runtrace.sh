@@ -21,16 +21,14 @@ done
 #cd ../..;
 #reps=20
 trace=$1;
-cvar=$2;
-reps=$5; 
+reps=$4; 
 
 #for cvar in 0.0 0.1 0.2 0.4; do
 #for bw in 300 400 500 600 700 800 900; do
 #for bw in 600 700 800 900 1000 1100 1200; do
-	cd has-evalvm/shaping
-	sudo ./setupShaper.sh	
+	sudo has-evalbm/shaping/setupShaper.sh	
 
-	has-evalvm/shaping/trace_loop.sh has-evalvm/shaping/trace_scripts/report_$trace.sh
+	screen -dmS trace has-evalvm/shaping/trace_loop.sh has-evalvm/shaping/trace_scripts/report_"$trace".sh
 
 	#for trace in "$traces_dir"/report_*.sh ; do
 		#file=$(basename "$bw" kbps)
@@ -39,31 +37,28 @@ reps=$5;
 		direct=$log_output_dir
 		mkdir $direct
 
-		std=$(echo $cvar*$bw | bc)
-		bwparam=$bw","${std%.*}
-
 		counter=1
 		while [ $counter -le $reps ]; do
 			#> $browser_log_dir
 			#output=$direct/"$bw"kbit_"$counter".log
 	
 #			chromium-browser --disk-cache-dir=/dev/null --mute-audio --enable-logging --log-level=0 http://127.0.0.1:8000/test.html &
-			python tapas/play.py -u http://127.0.0.1:8000/has-evalvm/vids/Parkour/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8 -m nodec -i $3 -b $bwparam -p $4 > player.log
+			python tapas/play.py -u http://127.0.0.1:8000/has-evalvm/vids/Parkour/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8 -m nodec -i $2 -p $3 > player.log
 #			python tapas-master/play.py -u http://localhost:8000/vids/BBB/playlist.m3u8 -m nodec -b $bwparam > player.log
 
 #		      cp server.log "$direct"/server_"$bw"kbit_cv"$cvar"_init"$3"_"$counter".log	
-		      cp player.log "$direct"/player_"$trace"_init"$3"_p"$4"_"$counter".log
+		      cp player.log "$direct"/player_"$trace"_init"$2"_p"$3"_"$counter".log
 
 #			pgrep trace_loop | xargs kill
 #			pgrep report_* | xargs kill
 #			killall python			
 
 			sleep 1s
-			echo "completed "$cvar","$bw","$counter
+			echo "completed "$trace","$counter
 			counter=$((counter + 1))
 		done
 #	done
 #done
-
-tar czf player_"$trace"_init"$3"_p"$4".tar.gz logs/*.log
-scp -o StrictHostKeyChecking=no player_"$trace"_init"$3"_p"$4".tar.gz valli@132.187.12.137:workspace/HASDocker/
+killall trace_loop.sh
+tar czf player_"$trace"_init"$2"_p"$3".tar.gz logs/*.log
+scp -o StrictHostKeyChecking=no player_"$trace"_init"$2"_p"$3".tar.gz valli@132.187.12.137:workspace/HASDocker/
