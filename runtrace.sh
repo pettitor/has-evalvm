@@ -26,7 +26,7 @@ reps=$4;
 #for cvar in 0.0 0.1 0.2 0.4; do
 #for bw in 300 400 500 600 700 800 900; do
 #for bw in 600 700 800 900 1000 1100 1200; do
-	sudo has-evalbm/shaping/setupShaper.sh	
+	sudo has-evalvm/shaping/setupShaper.sh	
 
 	screen -dmS trace has-evalvm/shaping/trace_loop.sh has-evalvm/shaping/trace_scripts/report_"$trace".sh
 
