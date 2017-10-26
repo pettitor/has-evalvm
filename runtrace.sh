@@ -37,6 +37,7 @@ reps=$4;
 		direct=$log_output_dir
 		mkdir $direct
 
+for p in 5 10 40; do
 		counter=1
 		while [ $counter -le $reps ]; do
 			#> $browser_log_dir
@@ -47,7 +48,7 @@ reps=$4;
 #			python tapas-master/play.py -u http://localhost:8000/vids/BBB/playlist.m3u8 -m nodec -b $bwparam > player.log
 
 #		      cp server.log "$direct"/server_"$bw"kbit_cv"$cvar"_init"$3"_"$counter".log	
-		      cp player.log "$direct"/player_"$trace"_init"$2"_p"$3"_"$counter".log
+		      cp player.log "$direct"/player_"$trace"_init"$2"_p"$p"_"$counter".log
 
 #			pgrep trace_loop | xargs kill
 #			pgrep report_* | xargs kill
@@ -59,6 +60,7 @@ reps=$4;
 		done
 #	done
 #done
+tar czf player_"$trace"_init"$2"_p"$p".tar.gz logs/*.log
+scp -o StrictHostKeyChecking=no player_"$trace"_init"$2"_p"$p".tar.gz valli@132.187.12.137:workspace/HASDocker/
+done
 killall trace_loop.sh
-tar czf player_"$trace"_init"$2"_p"$3".tar.gz logs/*.log
-scp -o StrictHostKeyChecking=no player_"$trace"_init"$2"_p"$3".tar.gz valli@132.187.12.137:workspace/HASDocker/
