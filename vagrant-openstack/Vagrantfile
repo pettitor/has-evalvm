@@ -3,7 +3,8 @@
 require 'vagrant-openstack-provider'
 
 bws=['300', '400', '500', '600', '700', '800', '900']
-cvs=['0.1', '0.2', '0.3']
+#cvs=['0.1', '0.2', '0.3']
+cvs=['0.4']
 inits=['1', '10']
 
 servers = Array.new {Hash.new}
@@ -126,7 +127,7 @@ Vagrant.configure(2) do |config|
      git clone https://github.com/pettitor/has-evalvm.git
      sudo has-evalvm/shaping/setupShaper.sh
 #     has-evalvm/run.sh #{ENV['BW']} #{ENV['CV']} #{ENV['MQ']} #{ENV['REPS']} &
-     screen -dmS run has-evalvm/run.sh #{machine[:bw]} #{machine[:cv]} #{machine[:init]} 30 &
+     screen -dmS run has-evalvm/run.sh #{machine[:bw]} #{machine[:cv]} #{machine[:init]} 40 30 &
   SHELL
 end
 end
