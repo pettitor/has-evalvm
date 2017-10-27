@@ -65,5 +65,5 @@ reps=$5;
 #	done
 #done
 
-tar czf player_"$trace"_init"$3"_p"$4".tar.gz logs/*.log
+tar czf player_"$trace"_init"$3"_p"$4".tar.gz logs/player_"$trace"_init"$3"_p"$4"*.log
 scp -o StrictHostKeyChecking=no player_"$trace"_init"$3"_p"$4".tar.gz valli@132.187.12.137:workspace/HASDocker/
