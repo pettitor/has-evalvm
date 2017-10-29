@@ -22,6 +22,8 @@ done
 #reps=20
 bw=$1;
 cvar=$2;
+init=$3;
+p=$4;
 reps=$5; 
 
 #for cvar in 0.0 0.1 0.2 0.4; do
@@ -42,18 +44,18 @@ reps=$5;
 
 		std=$(echo $cvar*$bw | bc)
 		bwparam=$bw","${std%.*}
-
+for p in 5 10 20 40; do
 		counter=1
 		while [ $counter -le $reps ]; do
 			#> $browser_log_dir
 			#output=$direct/"$bw"kbit_"$counter".log
 	
 #			chromium-browser --disk-cache-dir=/dev/null --mute-audio --enable-logging --log-level=0 http://127.0.0.1:8000/test.html &
-			python tapas/play.py -u http://127.0.0.1:8000/has-evalvm/vids/Parkour/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8 -m nodec -i $3 -b $bwparam -p $4 > player.log
+			python tapas/play.py -u http://127.0.0.1:8000/has-evalvm/vids/Parkour/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8 -m nodec -i $init -b $bwparam -p $p > player.log
 #			python tapas-master/play.py -u http://localhost:8000/vids/BBB/playlist.m3u8 -m nodec -b $bwparam > player.log
 
 #		      cp server.log "$direct"/server_"$bw"kbit_cv"$cvar"_init"$3"_"$counter".log	
-		      cp player.log "$direct"/player_"$bw"kbit_cv"$cvar"_init"$3"_p"$4"_"$counter".log
+		      cp player.log "$direct"/player_"$bw"kbit_cv"$cvar"_init"$init"_p"$p"_"$counter".log
 
 #			pgrep trace_loop | xargs kill
 #			pgrep report_* | xargs kill
@@ -66,5 +68,6 @@ reps=$5;
 #	done
 #done
 
-tar czf player_"$bw"kbit_cv"$cvar"_init"$3"_p"$4".tar.gz logs/*.log
-scp -o StrictHostKeyChecking=no player_"$bw"kbit_cv"$cvar"_init"$3"_p"$4".tar.gz valli@132.187.12.137:workspace/HASDocker/
+tar czf player_"$bw"kbit_cv"$cvar"_init"$init"_p"$p".tar.gz logs/player_"$bw"kbit_cv"$cvar"_init"$init"_p"$p"*.log
+scp -o StrictHostKeyChecking=no player_"$bw"kbit_cv"$cvar"_init"$init"_p"$p".tar.gz valli@132.187.12.137:workspace/HASDocker/
+done
