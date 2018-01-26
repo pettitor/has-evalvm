@@ -47,7 +47,7 @@ Vagrant.configure(2) do |config|
 #    os.project_id           = '487fa5992a014af4839b0d6756dad69f'
     os.project_name         = 'user-valentin.burger'
     os.domain_name          = 'lsinfo3'
-    os.password             = 'Poop5dae'
+    os.password             = 'yourpassword'
     os.identity_api_version = '3'
 #    os.server_name          = machine[:name]
     os.flavor               = 'm1.small'
@@ -123,8 +123,8 @@ Vagrant.configure(2) do |config|
        gstreamer0.10-plugins-* gstreamer0.10-ffmpeg gstreamer0.10-tools python-gst0.1 libgstreamer0.10-dev \
        python-scipy python-psutil
      sudo apt-get install -y git
-     git clone https://github.com/pettitor/tapas.git
-     git clone https://github.com/pettitor/has-evalvm.git
+     git clone https://github.com/v-burger/tapas.git
+     git clone https://github.com/v-burger/has-evalvm.git
      sudo has-evalvm/shaping/setupShaper.sh
 #     has-evalvm/run.sh #{ENV['BW']} #{ENV['CV']} #{ENV['MQ']} #{ENV['REPS']} &
      screen -dmS run has-evalvm/run.sh #{machine[:bw]} #{machine[:cv]} #{machine[:init]} 40 30 &

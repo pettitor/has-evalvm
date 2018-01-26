@@ -1,8 +1,5 @@
 #!/bin/bash
 
-#browser_log_dir="/home/valli/.config/chromium/chrome_debug.log"
-#browser_log_empty_dir="/home/valli/.config/chromium/chrome_debug_empty.log"
-#log_output_dir="/home/valli/workspace/HASDocker/logs/BBB/"
 log_output_dir=$(pwd)"/logs/"
 
 #start server
